@@ -5,7 +5,7 @@ Window::Window(QWidget *parent) : QWidget(parent), ui(new Ui::Window) {
   ui->setupUi(this);
   createTrayIcon();
   timer = new QTimer(this);
-  file.setFileName(".scratchpad");
+  file.setFileName(QDir::homePath()+ "/" + ".scratchpad");
   if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
     QMessageBox::information(this, tr("Unable to open file"),
                              file.errorString());
@@ -16,6 +16,7 @@ Window::Window(QWidget *parent) : QWidget(parent), ui(new Ui::Window) {
   ui->plainTextEdit->setPlainText(original);
   file.close();
   connect(timer, &QTimer::timeout, this, &Window::autoSave);
+  timer->start(60000);
 }
 
 void Window::createTrayIcon(){

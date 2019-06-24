@@ -9,7 +9,7 @@
 #include <QTextStream>
 #include <QTimer>
 #include <QWidget>
-
+#include <QDir>
 namespace Ui {
 class Window;
 }
